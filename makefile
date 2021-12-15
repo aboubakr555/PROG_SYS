@@ -1,9 +1,10 @@
-objets =  usecomplexe.o complexe.o
-cc = gcc
-cflags = -Wall -g
-usecomplexe : $(objets)
-	$(cc) $(cflags) $(objets) \ -o usecomplexe
-usecomplexe.o : usecomplexe.c complexe.h
-	$(cc) $(cflags) -c usecomplexe.c
+all : $(APPLI) clean
+$(APPLI) : $(APPLI).o complexe.o
+	gcc -Wall $(APPLI).o\
+	complexe.o -o $(APPLI)
+$(APPLI).o : $(APPLI).c complexe.h
+	gcc -Wall -c $(APPLI).c
 complexe.o : complexe.c complexe.h
-	$(cc) $(cflags)  -c complexe.c
+	gcc -Wall -c complexe.c
+clean : $(APPLI)
+	rm -f *.o
